@@ -1,25 +1,26 @@
 import * as console from 'console';
-import { ThorIO } from '../thor-io.node-client'
+import { ThorIO  } from '../thor-io.node-client'
 
-let client = new ThorIO.Client.NodeJSClient();
+let client = new ThorIO.Client.NodeJSClient(ThorIO.Client.BufferMessage);
+
 client.onOpen = () => {
+    console.log("Connected to fooController..")
     
-    console.log("Connected to controller..")
-
-    client.invoke("getToDos", {}, "TodoController"); // will fire todo's
+    client.invoke("fooMessage",{a:2},"fooController");
+    let a  = 0;
+    setInterval(() => {
+        client.invoke("fooMessage",{a:3},"fooController");
+        a++;
+    },1000 * 5);    
 }
 
-client.on("todo", (todo: any) => {
-    console.log("todo", todo);
-});
-
-client.on("todos", (todos: any) => {
-    console.log("todos", todos);
+client.on("fooMessage", (message: any) => {
+    console.log("fooMessage ->", message);
 });
 
 console.log("Connecting to 127.0.0.1..")
 
-client.open("127.0.0.1", 4502, "TodoController");
+client.open("127.0.0.1", 4503, "fooController");
 
 
 
