@@ -152,6 +152,7 @@ export namespace ThorIO.Client {
             this.events = new EventEmitter();
             this.socket = new net.Socket()
             this.socket.addListener("data", (buffer: Buffer) => {
+              
                 let message = transportMessage.fromBuffer(buffer);
 
                 this.events.emit(message.topic, message.data);
@@ -187,6 +188,7 @@ export namespace ThorIO.Client {
                 this.onOpen(ci);
             });
             this.socket.connect(port, host, () => {
+             
                 this.invoke("___connect", {}, controller)
             });
         }

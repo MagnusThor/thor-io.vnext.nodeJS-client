@@ -1,7 +1,7 @@
 {
   "name": "thor-io.vnext.nodejs-client",
-  "version": "1.0.0",
-  "description": "nodejs - client for thor-io.vnext",
+  "version": "1.1.0",
+  "description": "nodejs - client for thor-io.vnext.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
